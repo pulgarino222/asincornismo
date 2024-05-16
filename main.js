@@ -1,8 +1,8 @@
 console.log(`uno`)
 console.log(`dos`)
-setTimeout(() => {
-    alert("hola mundo")
-}, 10000);
+// setTimeout(() => {
+// //     alert("hola mundo")
+// // }, 10000);
 
 console.log(`tres`)
 console.log(`cuatro`)
@@ -43,17 +43,37 @@ let table =document.querySelector(".table")
 console.log(table)
 
 const newCategory={
-    nombre:"lemguajes de programacion",
-    imagen:"https://img.freepik.com/foto-gratis/colores-arremolinados-interactuan-danza-fluida-sobre-lienzo-que-muestra-tonos-vibrantes-patrones-dinamicos-que-capturan-caos-belleza-arte-abstracto_157027-2892.jpg",
+    name:"lemguajes de programacion777",
+    image:"https://img.freepik.com/foto-gratis/colores-arremolinados-interactuan-danza-fluida-sobre-lienzo-que-muestra-tonos-vibrantes-patrones-dinamicos-que-capturan-caos-belleza-arte-abstracto_157027-2892.jpg",
 }
 
 
-btn=document.querySelector("#btn-enviar")
-addEventListener("click",()=>enviarDatosALaAppi())
 
 
-function enviarDatosALaAppi(){
-    alert("hola mundo")
+
+const btn=document.querySelector("#btn-enviar")
+btn.addEventListener("click",eliminar)
+
+
+async function enviarDatosALaAppi(){
+    await fetch("https://api.escuelajs.co/api/v1/categories",{
+        method:"POST",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body: JSON.stringify(newCategory)
+    })
+    
     
 } 
 
+async function eliminar(){
+    let id=prompt("ingrese el id de la categoria que quieres eliminar")
+    await fetch(`https://api.escuelajs.co/api/v1/categories/${id}`,{
+        method:"DELETE",
+            headers:{
+                "content-type":"application/json"
+            },
+    })
+    location.reload()
+}
